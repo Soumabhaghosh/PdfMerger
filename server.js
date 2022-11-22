@@ -1,12 +1,16 @@
 const express = require('express')
 const app = express()
-const port = 3000
+let port = process.env.PORT
 const path=require('path')
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const PDFDocument = require('pdf-lib').PDFDocument
 const fs=require('fs')
 app.use('/static',express.static('/uploads'))
+if(port==null || port==""){
+  port=3000
+  
+  }
 
 async function merge(pdfBuffer1,pdfBuffer2) {
   var pdfsToMerge = [pdfBuffer1, pdfBuffer2]
